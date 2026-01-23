@@ -6,21 +6,28 @@ use App\Models\Service;
 
 class ServicesRepository
 {
-    /**
-     * Create a new class instance.
-     */
-    protected $services;
-    public function __construct(Service $services)
+    public function getServices()
     {
-        $this->services = $services;
+        return Service::get();
     }
 
-    public function getData(){
-        return $this->services->get();
+    public function getService($id)
+    {
+        return Service::find($id);
     }
 
-    public function storeData($data){
-        return $this->services->create($data);
+    public function store($data)
+    {
+        return Service::create($data);
     }
 
+    public function update($service, $data)
+    {
+        return $service->update($data);
+    }
+
+    public function delete($service)
+    {
+        return $service->delete();
+    }
 }

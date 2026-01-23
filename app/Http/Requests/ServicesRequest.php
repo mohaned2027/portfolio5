@@ -21,10 +21,18 @@ class ServicesRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $data = [
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'icon'        => 'required|string|max:100',
         ];
+
+        if ($this->method() == 'PUT') {
+            $data['title'] = 'sometimes|string|max:255';
+            $data['description'] = 'sometimes|string';
+            $data['icon'] = 'sometimes|string|max:100';
+        }
+
+        return $data;
     }
 }

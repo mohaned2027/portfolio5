@@ -6,6 +6,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TeamController;
@@ -93,6 +94,14 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     // Team
     Route::controller(TeamController::class)->prefix('team')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
+
+    // Services
+    Route::controller(ServiceController::class)->prefix('service')->group(function () {
         Route::get('/', 'index');
         Route::post('/store', 'store');
         Route::put('/update/{id}', 'update');

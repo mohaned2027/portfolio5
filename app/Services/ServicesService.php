@@ -6,21 +6,34 @@ use App\Repository\ServicesRepository;
 
 class ServicesService
 {
-    /**
-     * Create a new class instance.
-     */
-    protected $service;
-    public function __construct(ServicesRepository $services)
+    public function __construct(protected ServicesRepository $servicesRepository) {}
+
+    public function getServices()
     {
-        $this->service = $services;
+        return $this->servicesRepository->getServices();
     }
 
-    public function getData()
+    public function getService($id)
     {
-        return  $this->service->getData();
+        return $this->servicesRepository->getService($id) ?? false;
     }
 
-    public function storeData($data){
-        return $this->service->storeData($data);
+    public function store($data)
+    {
+        return $this->servicesRepository->store($data);
+    }
+
+    public function update($data, $id)
+    {
+        $service = $this->servicesRepository->getService($id);
+        if (!$service) return false;
+        return $this->servicesRepository->update($service, $data);
+    }
+
+    public function delete($id)
+    {
+        $service = $this->servicesRepository->getService($id);
+        if (!$service) return false;
+        return $this->servicesRepository->delete($service);
     }
 }
