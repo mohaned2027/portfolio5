@@ -6,6 +6,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ResumeOrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SkillController;
@@ -102,6 +103,14 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     // Services
     Route::controller(ServiceController::class)->prefix('service')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
+
+    // Resume Orders
+    Route::controller(ResumeOrderController::class)->prefix('resume-order')->group(function () {
         Route::get('/', 'index');
         Route::post('/store', 'store');
         Route::put('/update/{id}', 'update');
