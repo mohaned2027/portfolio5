@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserRequest;
+use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
     public function __construct(protected UserService $userService) {}
 
-    public function login(UserRequest $request)
+    public function login(LoginRequest $request)
     {
         $data = $request->validated();
         $token = $this->userService->login($data);
