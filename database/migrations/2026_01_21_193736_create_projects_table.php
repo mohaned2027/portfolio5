@@ -22,7 +22,13 @@ return new class extends Migration
             $table->string('link');
             $table->string('github');
             $table->json('technologies');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id')->nullable();
+
+            $table->foreign('service_id')
+                ->references('id')
+                ->on('services')
+                ->onDelete('cascade');
+
             $table->boolean('status')->default(true);
             $table->timestamps();
 
