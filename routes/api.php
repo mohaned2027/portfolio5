@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProjectController;
@@ -31,6 +32,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/auth/login', [LoginController::class, 'login']);
+Route::post('/contact-us/store', [ContactUsController::class, 'store']);
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     Route::get('/user', [UserController::class, 'index']);
@@ -114,6 +116,13 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         Route::get('/', 'index');
         Route::post('/store', 'store');
         Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
+
+    // Contact Us
+    Route::controller(ContactUsController::class)->prefix('contact-us')->group(function () {
+        Route::get('/', 'index');
+        Route::patch('/read/{id}', 'markRead');
         Route::delete('/delete/{id}', 'destroy');
     });
 });
