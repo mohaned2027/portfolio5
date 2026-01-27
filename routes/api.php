@@ -34,13 +34,35 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
+// Portfolio
 Route::post('/auth/login', [LoginController::class, 'login']);
 Route::post('/auth/forgot-password', [ForgetPasswordController::class, 'send']);
 Route::post('/auth/verify-otp', [OtpController::class, 'verify']);
 Route::post('/auth/reset-password', [ResetPasswordController::class, 'reset']);
 Route::post('/contact-us/store', [ContactUsController::class, 'store']);
+Route::get('/user', [UserController::class, 'index']);
+// Services
+Route::get('/service', [ServiceController::class, 'index']);
+// Portfolio
+Route::get('/portfolio', [ProjectController::class, 'index']);
+// Settings
+Route::get('/setting', [SettingController::class, 'index']);
+// Teams
+Route::get('/team', [TeamController::class, 'index']);
+// Certification
+Route::get('/certificate', [CertificateController::class, 'index']);
+// Blog
+Route::get('/blog', [BlogController::class, 'index']);
+//Resume
+Route::get('/resume', [ResumeOrderController::class, 'index']);
+Route::get('/skill', [SkillController::class, 'index']);
+Route::get('/experience', [ExperienceController::class, 'index']);
+Route::get('/education', [EducationController::class, 'index']);
 
 
+
+// Admin
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     Route::get('/user', [UserController::class, 'index']);

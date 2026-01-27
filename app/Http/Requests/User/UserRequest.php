@@ -41,6 +41,11 @@ class UserRequest extends FormRequest
                     'email',
                     Rule::unique('users', 'email')->ignore($this->user()?->id),
                 ],
+                'email_contact' => [
+                    'sometimes',
+                    'email',
+                    Rule::unique('users', 'email_contact')->ignore($this->user()?->id),
+                ],
                 'phone' => 'sometimes|string|min:6|max:30',
                 'birthday' => 'sometimes|date',
                 'location' => 'sometimes|string|min:2|max:255',

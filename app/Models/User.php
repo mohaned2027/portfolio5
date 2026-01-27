@@ -12,7 +12,7 @@ use Spatie\OneTimePasswords\Models\Concerns\HasOneTimePasswords;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens, HasOneTimePasswords;
+    use HasApiTokens, HasFactory, HasOneTimePasswords, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
         'social_links',
         'map_embed',
+        'email_contact',
     ];
 
     /**

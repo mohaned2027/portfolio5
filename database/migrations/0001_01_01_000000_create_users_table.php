@@ -13,28 +13,31 @@ return new class extends Migration
 
             // Basic info
             $table->string('name');
-            $table->string('title')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('title');
+            $table->string('avatar');
 
             // Contact
             $table->string('email')->unique();
-            $table->string('phone')->nullable();
-            $table->string('location')->nullable();
+            $table->string('phone');
+            $table->string('location');
 
             // Personal
-            $table->date('birthday')->nullable();
-            $table->text('about')->nullable();
+            $table->date('birthday');
+            $table->text('about');
 
             // Auth
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->string('password');
             $table->rememberToken();
 
             // Social links
-            $table->json('social_links')->nullable();
+            $table->json('social_links');
+
+            // Email Contact
+            $table->string('email_contact')->unique();
 
             // Map
-            $table->text('map_embed')->nullable();
+            $table->text('map_embed');
 
             $table->timestamps();
         });
