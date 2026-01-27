@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServicesRequest extends FormRequest
+class TeamProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,13 @@ class ServicesRequest extends FormRequest
     public function rules(): array
     {
         $data = [
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'icon'        => 'required|string|in:code,ui&ux,database,web,iot,mobile,hardware,backend,frontend',
+            'team_id' => 'required|integer|exists:teams,id',
+            'project_id' => 'required|integer|exists:projects,id',
         ];
 
         if ($this->method() == 'PUT') {
-            $data['title'] = 'sometimes|string|max:255';
-            $data['description'] = 'sometimes|string';
-            $data['icon'] = 'sometimes|string|in:code,ui&ux,database,web,iot,mobile,hardware,backend,frontend';
+            $data['team_id'] = 'sometimes|integer|exists:teams,id';
+            $data['project_id'] = 'sometimes|integer|exists:projects,id';
         }
 
         return $data;

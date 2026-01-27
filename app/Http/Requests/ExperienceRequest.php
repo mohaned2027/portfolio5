@@ -24,16 +24,18 @@ class ExperienceRequest extends FormRequest
         $data =
             [
                 'title'       => 'required|string|min:3|max:255',
-                'description' => 'required|string|min:3',
+                'description' => 'nullable|string|min:3',
                 'start_date'        => 'required|date|before_or_equal:now',
-                'end_date'        => 'required|string|after_or_equal:start_date',
+                'end_date'        => 'nullable|date|after_or_equal:start_date',
+                'order' => 'nullable|integer|min:0',
             ];
 
         if ($this->method() == 'PUT') {
             $data['title'] = 'sometimes|string|min:3|max:255';
-            $data['description'] = 'sometimes|string|min:3';
+            $data['description'] = 'sometimes|nullable|string|min:3';
             $data['start_date'] = 'sometimes|date|before_or_equal:now';
-            $data['end_date'] = 'sometimes|string|after_or_equal:start_date';
+            $data['end_date'] = 'sometimes|nullable|date|after_or_equal:start_date';
+            $data['order'] = 'sometimes|nullable|integer|min:0';
         }
 
         return $data;

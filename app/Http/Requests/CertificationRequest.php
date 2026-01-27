@@ -23,7 +23,7 @@ class CertificationRequest extends FormRequest
     {
         $data = [
             'name' => 'required|string|min:3|max:255',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'text' => 'required|string|min:3',
             'date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',

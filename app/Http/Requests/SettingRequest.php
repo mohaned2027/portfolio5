@@ -23,16 +23,16 @@ class SettingRequest extends FormRequest
     {
         $data = [
             'company' => 'required|string|min:2|max:255',
-            'logo' => 'required|image|max:500',
-            'favicon' => 'required|image|max:500',
-            'cv' => 'required|file|mimes:pdf|max:50000',
+            'logo' => 'required|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
+            'favicon' => 'required|image|mimes:jpg,jpeg,png,webp,svg,ico|max:512',
+            'cv' => 'required|file|mimes:pdf|max:10240',
         ];
 
         if ($this->method() == 'PUT') {
             $data['company'] = 'sometimes|string|min:2|max:255';
-            $data['logo'] = 'sometimes|image|max:500';
-            $data['favicon'] = 'sometimes|image|max:500';
-            $data['cv'] = 'sometimes|file|mimes:pdf|max:2048';
+            $data['logo'] = 'sometimes|image|mimes:jpg,jpeg,png,webp,svg|max:2048';
+            $data['favicon'] = 'sometimes|image|mimes:jpg,jpeg,png,webp,svg,ico|max:512';
+            $data['cv'] = 'sometimes|file|mimes:pdf|max:10240';
         }
 
         return $data;

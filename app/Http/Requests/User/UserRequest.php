@@ -23,11 +23,25 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $data = [
+            'name' => 'required|string|min:3|max:255',
+            'title' => 'required|string|min:3|max:255',
+            'avatar' => 'required|image|mimes:jpg,jpeg,png,webp,svg,gif|max:2048',
             'email' => [
                 'required',
                 'email',
                 Rule::unique('users', 'email')->ignore($this->user()?->id),
             ],
+            'contact_email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'contact_email')->ignore($this->user()?->id),
+            ],
+            'phone' => 'required|string|min:6|max:30',
+            'location' => 'required|string|min:2|max:255',
+            'birthday' => 'required|date',
+            'about' => 'required|string|min:3',
+            'map_embed' => 'required|string',
+            'social_links' => 'required|array',
             'password' => 'required|string|min:8',
         ];
 
@@ -35,7 +49,7 @@ class UserRequest extends FormRequest
             $data = [
                 'name' => 'sometimes|string|min:3|max:255',
                 'title' => 'sometimes|string|min:3|max:255',
-                'avatar' => 'sometimes|image|mimes:jpg,jpeg,png, webp ,svg , gif|max:2048',
+                'avatar' => 'sometimes|image|mimes:jpg,jpeg,png,webp,svg,gif|max:2048',
                 'email' => [
                     'sometimes',
                     'email',
