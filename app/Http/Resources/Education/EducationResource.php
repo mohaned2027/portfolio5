@@ -18,7 +18,7 @@ class EducationResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'period' => $this->start_date . ' - ' . ($this->end_date ?? 'Present'),
+            'period' => $this->start_date . ' / ' . ($this->end_date ?? 'Present'),
         ];
     }
 }

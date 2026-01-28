@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Repository\BlogRepository;
+use App\Utils\ImageManager;
 
 class BlogService
 {
-    public function __construct(protected BlogRepository $blogRepository) {}
+    public function __construct(protected BlogRepository $blogRepository, protected ImageManager $imageManager) {}
 
     public function getBlogs()
     {
@@ -20,20 +21,41 @@ class BlogService
 
     public function store($data)
     {
+        if (isset($data['image'])) {
+            $data['image'] = $this->imageManager->uploadSingleImage($data['image'], 'blogs', 'store');
+            if (! $data['image']) {
+                return false;
+            }
+        }
+
         return $this->blogRepository->store($data);
     }
 
     public function update($data, $id)
     {
         $blog = $this->blogRepository->getBlog($id);
-        if (!$blog) return false;
+
+        if (isset($data['image'])) {
+            $data['image'] = $this->imageManager->uploadSingleImage($data['image'], 'blogs', 'store', $blog->image);
+            if (! $data['image']) {
+                return false;
+            }
+        }
+        if (! $blog) {
+            return false;
+        }
+
         return $this->blogRepository->update($blog, $data);
     }
 
     public function delete($id)
     {
         $blog = $this->blogRepository->getBlog($id);
-        if (!$blog) return false;
+        if (! $blog) {
+            return false;
+        }
+        $this->imageManager->deleteImageFromLocal($blog->image);
+
         return $this->blogRepository->delete($blog);
     }
 }

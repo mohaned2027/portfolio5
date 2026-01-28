@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('desc');
             $table->string('image_cover');
             $table->json('images');
-            $table->string('link');
-            $table->string('github');
+            $table->string('link')->nullable();
+            $table->string('github')->nullable();
             $table->json('technologies');
             $table->unsignedBigInteger('service_id')->nullable();
 
