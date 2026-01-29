@@ -20,7 +20,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Laravel writable dirs (مهم جدًا)
-RUN mkdir -p storage bootstrap/cache \
+RUN mkdir -p storage bootstrap/cache \ 
  && chmod -R 775 storage bootstrap/cache
 
 # Railway supplies PORT; default 8080
